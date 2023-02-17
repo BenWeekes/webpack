@@ -1,4 +1,4 @@
-var AgoraRTCUtils = (function () {
+function AgoraRTCUtils(){
 
   var AdjustFrequency = 500; // ms between checks
   var ResultCountToStepUp = 6; // number of consecutive positive results before step up occurrs
@@ -838,11 +838,11 @@ strategy
     RemoteStatusPoor: RemoteStatusPoor,
     RemoteStatusCritical: RemoteStatusCritical,
   };
-})();
+}
 
+export {AgoraRTCUtils}
 
-
-var AgoraRTCUtilEvents = (function () {
+function AgoraRTCUtilEvents() {
 
   var events = {};
 
@@ -876,4 +876,6 @@ var AgoraRTCUtilEvents = (function () {
     emit: emit
   };
 
-})();
+}
+
+export {AgoraRTCUtilEvents}

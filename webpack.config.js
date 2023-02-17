@@ -1,9 +1,16 @@
+const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
-  optimization: {
-    minimize: true
+optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          keep_fnames: true,
+        },
+      }),
+    ],
   },
     entry: './src/AgoraRTCUtil.js',
     output: {
