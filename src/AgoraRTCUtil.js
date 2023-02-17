@@ -1,5 +1,30 @@
-function AgoraRTCUtils(){
+AgoraRTCUtils = (function () {
 
+
+  // Auto Adjust Resolutions
+
+  // This utility will adjust the camera encoding profile dynamically in order to adapt to slower networks 
+  // and also to support devices which insufficient CPU/GPU resources required to encode and decode higher resolution video streams
+  // This utility is intended mainly for iOS devices where both Safari and Chrome do not automatically 
+  // lower the encoding resolution when the outgoing bitrate is reduced or the encoder is stuggling to reach the desired FPS
+
+  // It is useful on other browsers as well to avoid the bit rate dropping too low too quickly in the presence of packet loss.
+
+  /* To use this module, simply include this JS file e.g.
+     <script src="./sdk/AgoraRTCUtil.js"></script>
+     and call the following after client.publish(..)
+     AgoraRTCUtils.startAutoAdjustResolution(this.clients[this.myPublishClient],"360p_11");
+  
+     It is recommended that you start with the following settings in your app which correspond to the 360p_11 profile from the list below
+     
+          [this.localTracks.audioTrack, this.localTracks.videoTrack] = await AgoraRTC.createMicrophoneAndCameraTracks(
+          { microphoneId: this.micId }, { cameraId: this.cameraId, encoderConfig: { width:640, height: 360, frameRate: 24, bitrateMin: 400, bitrateMax: 1000} });
+  
+    To avoid losing the camera feed on iOS when switching resolution you should explicity select the camera and mic in the SDK e.g.
+        await agoraApp.localTracks.videoTrack.setDevice(currentCam.deviceId);
+        await agoraApp.localTracks.audioTrack.setDevice(currentMic.deviceId);
+    
+*/
   var AdjustFrequency = 500; // ms between checks
   var ResultCountToStepUp = 6; // number of consecutive positive results before step up occurrs
   var ResultCountToStepDown = 10; // number of consecutive negative results before step down occurrs
@@ -838,11 +863,11 @@ strategy
     RemoteStatusPoor: RemoteStatusPoor,
     RemoteStatusCritical: RemoteStatusCritical,
   };
-}
+})();
 
-export {AgoraRTCUtils}
 
-function AgoraRTCUtilEvents() {
+
+AgoraRTCUtilEvents = (function () {
 
   var events = {};
 
@@ -876,6 +901,7 @@ function AgoraRTCUtilEvents() {
     emit: emit
   };
 
-}
+})();
 
-export {AgoraRTCUtilEvents}
+window.AgoraRTCUtils=AgoraRTCUtils
+window.AgoraRTCUtilEvents=AgoraRTCUtilEvents

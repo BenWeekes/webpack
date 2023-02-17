@@ -14,7 +14,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "terser-webpack-plugin": "latest",
+    "terser-webpack-plugin": "4.2.3",
     "path": "latest"
   }
 }
